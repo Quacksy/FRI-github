@@ -28,8 +28,8 @@ from math import sqrt, sin, cos
 # k = np.arange(5)
 # print(k)
 #
-dodatek = np.linspace(0, 3.5, 15)
-print(dodatek)
+# dodatek = np.linspace(0, 3.5, 15)
+# print(dodatek)
 #
 # rand = np.random.randint(0, 100, (4, 3))
 # print(rand)
