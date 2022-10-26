@@ -1,10 +1,14 @@
+from distutils.log import set_verbosity
+from typing import overload
 import numpy as np
 
 
 #Segrevanje
 ovire = ".##..####...##"
-npovire = np.array(ovire)
-npovire = np.char.split(npovire, sep=None, maxsplit=None)
+stevec = 0
+preverjanje ='.' in ovire
+print(preverjanje)
+
 
 # zemljevid = [
 #     "......",
