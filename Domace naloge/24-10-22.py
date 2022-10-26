@@ -25,8 +25,8 @@ from math import sqrt, sin, cos
 # d2 = np.full((4, 3), 4)
 # print(d2)
 #
-# k = np.arange(5)
-# print(k)
+k = np.arange(5)
+print(k)
 #
 # dodatek = np.linspace(0, 3.5, 15)
 # print(dodatek)
@@ -48,11 +48,11 @@ from math import sqrt, sin, cos
 # poprecje = np.mean(d)
 # print(poprecje)
 
-# r = np.random.randint(1, 100, (10, 10))
-# print(r)
+r = np.random.randint(1, 100, (10, 10))
+print(r)
 #
-# ocena = np.full(r.shape, "", dtype=object)
-# print(ocena)
+ocena = np.full(r.shape, "", dtype=object)
+print(ocena)
 #
 # ocena[r < 30] = ["bravo"]
 # ocena[r > 30] = ['vadi misko']
