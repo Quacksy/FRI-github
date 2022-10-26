@@ -6,9 +6,6 @@ ovire = ".##..####...##"
 npovire = np.array(ovire)
 npovire = np.char.split(npovire, sep=None, maxsplit=None)
 
-
-
-
 # zemljevid = [
 #     "......",
 #     "..##..",
