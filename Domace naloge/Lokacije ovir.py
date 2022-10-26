@@ -1,4 +1,3 @@
-from turtle import right
 import numpy as np
 
 zemljevid = [
