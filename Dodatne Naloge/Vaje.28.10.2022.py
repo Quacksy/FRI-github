@@ -77,8 +77,10 @@ oklepaji = "(()()())()"
 oklepaji_zaprti = 0
 
 # Naloga 5.
+
 print('NAloga 5.')
 print()
+
 izraz = "ABCabc"
 sklad = []
 pari = {'(': ')', 'A': 'a', 'B': 'b', 'C': 'c', 'D': 'd'}
