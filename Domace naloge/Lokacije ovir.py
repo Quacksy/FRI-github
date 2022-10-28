@@ -7,12 +7,11 @@ import numpy as np
 #Segrevanje
 ovire = ".##..####...##"
 pregled = []
-steevec = 1
-for i in ovire:
-    if i == '#':
-        pregled.append(steevec)
-    steevec += 1
-print(pregled)
+
+for od in ovire:
+    for do in ovire:
+        print(od)
+        print(do)
 
 
 
