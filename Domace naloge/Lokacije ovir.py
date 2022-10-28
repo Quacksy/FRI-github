@@ -1,13 +1,20 @@
 from distutils.log import set_verbosity
+from turtle import right
 from typing import overload
 import numpy as np
 
 
 #Segrevanje
 ovire = ".##..####...##"
-stevec = 0
-preverjanje ='.' in ovire
-print(preverjanje)
+pregled = []
+steevec = 1
+for i in ovire:
+    if i == '#':
+        pregled.append(steevec)
+    steevec += 1
+print(pregled)
+
+
 
 
 # zemljevid = [
