@@ -38,10 +38,19 @@ print("Mati, bonbonov bi")
 print("-" * 50)
 
 #Segrevanje
-s = [int(x) for x in input("Seznam: ").split()]
-for st in s:
-    if st % 2 != 0:
-        print("da")
-    else:
-        print("ne")
+# s = [int(x) for x in input("Seznam: ").split()]
+# for st in s:
+#     if st % 2 != 0:
+#         print("da")
+#     else:
+#         print("ne")
 #Naloga
+
+otroci = [4, 0, 2, 3, 2, 0, 3, 4, 4, 4]
+
+for otroci in range(6):
+    if range in otroci:
+        print("usi so dobili bonbone")
+    else:
+        print("USi niso dobili bonbone")
+
