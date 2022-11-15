@@ -1,99 +1,152 @@
 import unittest
-
+import numpy as np
 
 # 1. Funkcija prejme ovire v obliki seznama trojk (x0, x1, y) in vrne število ovir.
+
 def stevilo_ovir(ovire):
     return len(ovire)
 
 
 # 2. Funkcija vrne skupno dolžino vseh ovir.
-def dolzina_ovir(ovire):
-    skupna_dolzina = 0
 
-    for x, x1, y in ovire:
-        skupna_dolzina = skupna_dolzina + x1
-    return skupna_dolzina
+def dolzina_ovir(ovire):
+    dolzina = 0
+
+    for od, do, _ in ovire:
+        racun = do - od + 1
+        dolzina = dolzina + racun
+
+    return dolzina
+
 
 
 # 3. Funkcija vrne širino kolesarke steze, se pravi najbolj desno koordinato v seznamu ovir.
+
 def sirina(ovire):
-    sirina = 0
+
+    sirina = None
 
     for _, x1, _ in ovire:
-        if sirina < x1:
+        if sirina == None or x1 > sirina:
             sirina = x1
+
     return sirina
 
 
-# 4. Funkcija prejme vrstico v obliki niza, sestavljenega iz znakov # in . ter vrne seznam parov (x0, x1) (ogrevalni del
-# domače naloge prejšnjega tedna).
+# 4. Funkcija prejme vrstico v obliki niza, sestavljenega iz znakov # in . ter vrne seznam parov
+#    (x0, x1) (ogrevalni del domače naloge prejšnjega tedna).
+
 def pretvori_vrstico(vrstica):
+    vrstica = "." + vrstica + "."
+    spremembe = []
+
+    for i in range(len(vrstica)):
+        if vrstica[i] != vrstica[i - 1]:
+            spremembe.append(i)
+
     bloki = []
-    for i, (prej, znak, potem) in enumerate(zip("." + vrstica, vrstica, vrstica[1:] + "."), start=1):
-        if znak == "#":
-            if prej == ".":
-                zacetek = i
-            if potem == ".":
-                bloki.append((zacetek, i))
+
+    for zac, kon in zip(spremembe[::2], spremembe[1::2]):
+        bloki.append((zac, kon - 1))
+
     return bloki
 
-# 5. Funkcija dobi zemljevid v obliki seznama nizov in vrne seznam ovir (obvezna domača naloga prejšnjega tedna).
-# Funkcija mora uporabiti prejšnji dve funkciji - testi bodo to preverili tako, da bodo začasno zamenjali tvojo funkcijo z neko drugo,
-# ki vrača napačne številke in preverili, ali so številke res "pravilno napačne".
+
+# 5. Funkcija prejme seznam, kakršnega vrača prejšnja funkcija in neko število y.
+#    Vrniti mora seznam, v katerem je vsakemu paru dodan y.
+#    Klic dodaj_vrstico([(3, 4), (6, 8), (11, 11)], 3) vrne [(3, 4, 3), (6, 8, 3), (11, 11, 3)].
+
+def dodaj_vrstico(bloki, y):
+    nova = []
+
+    for vrstice in bloki:
+        listvrstice = list(vrstice)
+
+        listvrstice.append(y)
+        nova.append(tuple(listvrstice))
+
+    return nova
+
+
+# 6. Funkcija dobi zemljevid v obliki seznama nizov in vrne seznam ovir (obvezna domača naloga prejšnjega tedna).
+#    Funkcija mora uporabiti prejšnji dve funkciji - testi bodo to preverili tako,
+#    da bodo začasno zamenjali tvojo funkcijo z neko drugo,
+#    ki vrača napačne številke in preverili, ali so številke res "pravilno napačne".
+
 def pretvori_zemljevid(zemljevid):
-    lokacije = []
+    lokacija = []
 
-    for y, ovire in enumerate(zemljevid):
-        a = (pretvori_vrstico(ovire))
-        lokacije.append((a))
-        print(a)
-    return lokacije
+    for vrstica, ovire in enumerate(zemljevid):
+
+        lokacije = dodaj_vrstico(pretvori_vrstico(ovire), vrstica + 1)
+        for elementi in lokacije:
+            lokacija.append(elementi)
+
+    return lokacija
 
 
-# 6. Funkcija prejme seznam ovir (v obliki trojk) in vrne vrstico, v kateri bi kolesar,
-# ki se vozi po stolpcu x, naletel na oviro (naloga izpred dveh tednov). Če v stolpcu ni ovir, naj vrne None.
+# 7. Funkcija prejme seznam ovir (v obliki trojk) in vrne vrstico, v kateri bi kolesar, ki se vozi po stolpcu x,
+#    naletel na oviro (naloga izpred dveh tednov). Če v stolpcu ni ovir, naj vrne None.
+
 def globina(ovire, x):
     ymin = None
+
     for x0, x1, yn in ovire:
-        if x0 <= x <= x1 and (ymin is None or yn < ymin):
+        if x0 <= x <= x1 and (ymin == None or yn < ymin):
             ymin = yn
+
     return ymin
 
-# 7. Funkcija vrne stolpec, v katerem kolesar pride najdlje in vrstico, do katere pride. Možno je tudi,
-# da v kakem stolpcu ni ovire; v tem primeru vrne koordinato tega stolpca in None.
-# def naj_stolpec(ovire):
-#     spremenljivka = 1
-#     sirinanova = sirina(ovire)
-#
-#     while spremenljivka <= sirinanova:
-#         naj_y = naj_x = 0
-#
-#         for spremenljivka in range(1, sirinanova + 1):
-#             ymin = None
-#
-#             for x0, x1, yn in ovire:
-#
-#                 if x0 <= spremenljivka <= x1 and (ymin is None or yn < ymin):
-#                     ymin = yn
-#
-#             if ymin == None or ymin > naj_y:
-#                 naj_y = ymin
-#                 naj_x = spremenljivka
-#
-#                 if None == ymin:
-#
-#                     break
-#
-#         spremenljivka += 1
-#
-#         print(naj_y, naj_x)
-#     return naj_x, naj_y
+
+# 8. Funkcija vrne stolpec, v katerem kolesar pride najdlje in vrstico, do katere pride. Možno je tudi,
+#    da v kakem stolpcu ni ovire; v tem primeru vrne koordinato tega stolpca in None.
+
+def naj_stolpec(ovire):
+    sirinapoti = sirina(ovire)
+    naj_y = naj_x = 0
+
+    for x in range(1, sirinapoti + 1):
+        ymin = None
+
+        for x0, x1, yn in ovire:
+            if x0 <= x <= x1 and (ymin is None or yn < ymin):
+                ymin = yn
+
+        if ymin is None or ymin > naj_y:
+            naj_y = ymin
+            naj_x = x
+
+            if ymin is None:
+                break
+
+    return naj_x, naj_y
+
+
+# 9. Funkcija vrne seznam, katerega elementa so False oz. True glede na to, ali stolpec vsebuje kako oviro ali ne.
+#     Če je širina poti 5 in sta drugi in zadnji stolpec brez ovir, vrne [False, True, False, False, True].
 
 def senca(ovire):
-    ...
+    sirinapoti = sirina(ovire)
+    tabelapreverjanj = []
+
+    for x in range(1, sirinapoti + 1):
+        ymin = None
+        for x0, x1, yn in ovire:
+            if x0 <= x <= x1 and (ymin is None or yn < ymin):
+                ymin = yn
+
+        if ymin is None:
+            tabelapreverjanj.append(True)
+        else:
+            tabelapreverjanj.append(False)
+    return tabelapreverjanj
 
 
-# TESTI
+
+
+
+
+
 ovire1 = [(1, 3, 6), (2, 4, 3), (4, 6, 7),
           (3, 4, 9), (6, 9, 5), (9, 10, 2), (9, 10, 8)]
 
@@ -189,5 +242,5 @@ class Test(unittest.TestCase):
         self.assertEqual([False] * 3, senca(ovire3[:1]))
 
 
-if __name__ == 'Domaca naloga funkcije.py':
+if __name__ == "__main__":
     unittest.main()
