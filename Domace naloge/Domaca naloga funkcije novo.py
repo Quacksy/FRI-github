@@ -1,5 +1,5 @@
 import unittest
-import numpy as np
+
 
 # 1. Funkcija prejme ovire v obliki seznama trojk (x0, x1, y) in vrne število ovir.
 
@@ -19,18 +19,16 @@ def dolzina_ovir(ovire):
     return dolzina
 
 
-
 # 3. Funkcija vrne širino kolesarke steze, se pravi najbolj desno koordinato v seznamu ovir.
 
 def sirina(ovire):
-
-    sirina = None
+    sirinaovir = None
 
     for _, x1, _ in ovire:
-        if sirina == None or x1 > sirina:
-            sirina = x1
+        if sirinaovir is None or x1 > sirinaovir:
+            sirinaovir = x1
 
-    return sirina
+    return sirinaovir
 
 
 # 4. Funkcija prejme vrstico v obliki niza, sestavljenega iz znakov # in . ter vrne seznam parov
@@ -92,7 +90,7 @@ def globina(ovire, x):
     ymin = None
 
     for x0, x1, yn in ovire:
-        if x0 <= x <= x1 and (ymin == None or yn < ymin):
+        if x0 <= x <= x1 and (ymin is None or yn < ymin):
             ymin = yn
 
     return ymin
@@ -140,11 +138,6 @@ def senca(ovire):
         else:
             tabelapreverjanj.append(False)
     return tabelapreverjanj
-
-
-
-
-
 
 
 ovire1 = [(1, 3, 6), (2, 4, 3), (4, 6, 7),
