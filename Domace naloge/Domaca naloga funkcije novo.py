@@ -137,6 +137,7 @@ def senca(ovire):
             tabelapreverjanj.append(True)
         else:
             tabelapreverjanj.append(False)
+
     return tabelapreverjanj
 
 
